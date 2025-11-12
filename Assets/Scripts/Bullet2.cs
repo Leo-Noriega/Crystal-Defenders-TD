@@ -2,18 +2,17 @@ using UnityEngine;
 
 public class Bullet2 : MonoBehaviour
 {
-    public float damage = 10f; // Damage dealt by the bullet
+    public float damage = 10f;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        // Check if the bullet hits a tower
-        TowerHealth towerHealth = collision.gameObject.GetComponent<TowerHealth>();
+        TowerHealth towerHealth = other.GetComponent<TowerHealth>();
         if (towerHealth != null)
         {
-            // Apply damage to the tower
+            // Aplicar daño
             towerHealth.TakeDamage(damage);
 
-            // Destroy the bullet after it hits the tower
+            // Destruir la bala al impactar
             Destroy(gameObject);
         }
     }
