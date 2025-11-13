@@ -4,6 +4,23 @@ public class Bullet2 : MonoBehaviour
 {
     public float damage = 10f;
 
+    public float lifeSeconds = 5f;
+    private float life;
+
+    private void OnEnable()
+    {
+        life = lifeSeconds;
+    }
+
+    private void Update()
+    {
+        life -= Time.deltaTime;
+        if (life <= 0f)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         TowerHealth towerHealth = other.GetComponent<TowerHealth>();
@@ -13,7 +30,7 @@ public class Bullet2 : MonoBehaviour
             towerHealth.TakeDamage(damage);
 
             // Destruir la bala al impactar
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

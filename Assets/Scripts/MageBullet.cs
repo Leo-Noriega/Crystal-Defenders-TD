@@ -40,11 +40,4 @@ public class SimpleBullet : MonoBehaviour
         if (life <= 0f) gameObject.SetActive(false);
     }
 
-    // Opcional: Desactivar si choca con algo
-    void OnTriggerEnter(Collider other)
-    {
-        // Aquí puedes poner tu lógica de daño
-        // if (other.CompareTag("Enemy")) { ... }
-        gameObject.SetActive(false);
-    }
 }

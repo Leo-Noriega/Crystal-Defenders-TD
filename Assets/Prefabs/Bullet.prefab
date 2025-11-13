@@ -195,5 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0948e53a13c40d14596c415b37bab7fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageProjectile
-  damage: 10
+  damage: 0.2
   destroyDelay: 0.1
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 0

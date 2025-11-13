@@ -14,6 +14,8 @@ public class MortarTower : MonoBehaviour
     public float range = 20f;
     public float fireRate = 0.5f;    // Dispara más lento que la torre mágica
     public LayerMask enemyLayers;
+    [Header("Damage")]
+    public float damage = 40f;
 
     readonly List<MortarBullet> pool = new();
     float fireCd;
@@ -49,6 +51,8 @@ public class MortarTower : MonoBehaviour
         if (projectile)
         {
             projectile.transform.position = firePoint.position;
+            projectile.damage = damage;
+            projectile.enemyLayers = enemyLayers;
             // Lanzamos el proyectil hacia la posición donde ESTABA el enemigo
             projectile.Launch(targetPos);
         }
