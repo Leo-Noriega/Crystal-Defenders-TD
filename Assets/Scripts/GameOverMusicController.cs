@@ -17,14 +17,6 @@ public class GameOverMusicController : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        if (audioSource != null && !audioSource.isPlaying)
-        {
-            audioSource.Play();
-        }
-    }
-
     public void PlayMusic()
     {
         if (audioSource != null && !audioSource.isPlaying)

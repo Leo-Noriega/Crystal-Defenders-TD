@@ -7,7 +7,6 @@ public class TowerHealth : MonoBehaviour
     [Header("Game Over UI")] 
     [SerializeField] private GameObject gameOverPanel; // Panel con el mensaje GAME OVER (inactivo al inicio)
     [SerializeField] private Button retryButton;       // Botón "Jugar de nuevo"
-    [SerializeField] private AudioSource gameOverMusic;
 
     public float maxHealth = 100f; // Maximum health of the tower
     private float currentHealth;
@@ -76,13 +75,14 @@ public class TowerHealth : MonoBehaviour
         // Pausar el juego (opcional); comenta esta línea si no quieres pausar
         Time.timeScale = 0f;
 
-        if (gameOverMusic != null)
+        var musicController = FindFirstObjectByType<GameOverMusicController>();
+        if (musicController != null)
         {
-            gameOverMusic.Play();
+            musicController.PlayMusic();
         }
         else
         {
-            Debug.LogWarning("No se asignó música de Game Over.");
+            Debug.LogWarning("No se encontró GameOverMusicController en la escena.");
         }
         
         if (gameOverPanel != null)
@@ -95,6 +95,13 @@ public class TowerHealth : MonoBehaviour
                 retryButton.onClick.AddListener(() =>
                 {
                     Time.timeScale = 1f;
+                    
+                    var musicController = FindFirstObjectByType<GameOverMusicController>();
+                    if (musicController != null)
+                    {
+                        musicController.StopMusic();
+                    }
+                    
                     Scene current = SceneManager.GetActiveScene();
                     SceneManager.LoadScene(current.buildIndex);
                 });
