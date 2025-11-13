@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6102285286785036483}
   - component: {fileID: 7385713044251707673}
   - component: {fileID: 5075818998593598041}
+  - component: {fileID: 4813875105273972481}
   m_Layer: 3
   m_Name: MageBullet
   m_TagString: Untagged
@@ -169,3 +170,20 @@ MonoBehaviour:
   speed: 15
   turnSpeed: 5
   lifeSeconds: 5
+--- !u!114 &4813875105273972481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4201254395057897189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0948e53a13c40d14596c415b37bab7fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DamageProjectile
+  damage: 25
+  destroyDelay: 0.05
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 64
