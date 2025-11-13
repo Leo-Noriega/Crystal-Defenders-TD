@@ -4,47 +4,77 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Enemy))]
 public class EnemyWaypointController : MonoBehaviour
 {
-    public Transform[] waypoints;      // Tus waypoints + torre final
+    private Transform[] waypoints;
     private int currentIndex = 0;
+
     private Enemy enemy;
     private NavMeshAgent agent;
 
-    void Start()
+    void Awake()
     {
         enemy = GetComponent<Enemy>();
         agent = enemy.agent;
 
-        if (waypoints.Length > 0)
+        LoadWaypoints();
+    }
+
+    void Start()
+    {
+        if (waypoints == null || waypoints.Length == 0)
         {
-            enemy.destination = waypoints[currentIndex];
-            agent.SetDestination(enemy.destination.position);
+            Debug.LogError("No hay Waypoints en la escena.");
+            return;
         }
-        else
-        {
-            Debug.LogError("Waypoints no asignados en EnemyWaypointController");
-        }
+
+        currentIndex = 0;
+        MoveToWaypoint(currentIndex);
     }
 
     void Update()
     {
-        if (enemy.destination == null || waypoints.Length == 0) return;
+        if (waypoints == null || waypoints.Length == 0) return;
 
-        // Usa remainingDistance del NavMeshAgent para detectar llegada
-        if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+        // Usamos un margen pequeño en lugar de stoppingDistance para evitar que se quede atorado
+        if (!agent.pathPending && agent.remainingDistance < 0.1f)
         {
             currentIndex++;
-
             if (currentIndex < waypoints.Length)
             {
-                // Siguiente waypoint
-                enemy.destination = waypoints[currentIndex];
-                agent.SetDestination(enemy.destination.position);
+                MoveToWaypoint(currentIndex);
             }
             else
             {
-                // Llegó al final del recorrido
-                Destroy(gameObject); // o daño a la torre
+                // Llegó al final → se detiene y desaparece
+                agent.isStopped = true;
+                gameObject.SetActive(false);
+                Destroy(gameObject);
             }
+        }
+    }
+
+    private void MoveToWaypoint(int index)
+    {
+        if (waypoints == null || index >= waypoints.Length) return;
+
+        agent.isStopped = false;
+        agent.SetDestination(waypoints[index].position);
+    }
+
+    private void LoadWaypoints()
+    {
+        GameObject parent = GameObject.Find("Waypoints");
+        if (parent == null)
+        {
+            Debug.LogError("No se encontró el objeto Waypoints.");
+            return;
+        }
+
+        int count = parent.transform.childCount;
+        waypoints = new Transform[count];
+
+        for (int i = 0; i < count; i++)
+        {
+            waypoints[i] = parent.transform.GetChild(i);
         }
     }
 }
