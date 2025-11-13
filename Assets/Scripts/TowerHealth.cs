@@ -117,6 +117,7 @@ public class TowerHealth : MonoBehaviour
         {
             healthSlider.maxValue = maxHealth;
             healthSlider.value = currentHealth;
+            
         }
     }
 }
