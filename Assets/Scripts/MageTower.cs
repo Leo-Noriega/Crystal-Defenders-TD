@@ -13,6 +13,8 @@ public class SimpleTurret : MonoBehaviour
     public float range = 15f;                // Rango de detección
     public LayerMask enemyLayers;
     public float fireRate = 1f;              // Balas por segundo
+    [Header("Damage")]
+    public float damagePerShot = 25f;
 
     readonly List<SimpleBullet> bullets = new();
     float fireCd;
@@ -58,6 +60,11 @@ public class SimpleTurret : MonoBehaviour
             bullet.transform.position = firePoint.position;
             bullet.transform.rotation = firePoint.rotation; // Sale con la orientación del firepoint
             bullet.gameObject.SetActive(true);
+            var dmg = bullet.GetComponent<DamageProjectile>();
+            if (dmg != null)
+            {
+                dmg.SetDamage(damagePerShot);
+            }
             // ¡Aquí está la magia! Le decimos a la bala quién es su presa.
             bullet.SetTarget(target);
         }

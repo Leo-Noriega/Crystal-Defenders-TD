@@ -142,6 +142,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   fireRate: 0.85
+  damagePerShot: 10
 --- !u!1 &7506021163103145051
 GameObject:
   m_ObjectHideFlags: 0

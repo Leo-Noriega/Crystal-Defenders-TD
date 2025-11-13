@@ -10,6 +10,7 @@ public class MortarBullet : MonoBehaviour
 
     [Header("Daño")]
     public float damageRadius = 3f;
+    public float damage = 40f;
     public LayerMask enemyLayers;    // Para optimizar la detección de enemigos
 
     private Vector3 startPos;
@@ -87,8 +88,13 @@ public class MortarBullet : MonoBehaviour
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, damageRadius, enemyLayers);
         foreach (Collider enemy in hitEnemies)
         {
-             // Tu lógica de daño aquí, ej: enemy.GetComponent<Enemy>().TakeDamage(10);
-             Debug.Log("BOOM! " + enemy.name);
+            var health = enemy.GetComponentInParent<Health>();
+            if (health == null) health = enemy.GetComponent<Health>();
+            if (health != null)
+            {
+                health.TakeDamage(damage);
+                Debug.Log($"BOOM! {enemy.name} recibió {damage} de daño");
+            }
         }
         gameObject.SetActive(false);
     }

@@ -61,9 +61,13 @@ public class LightingTower : MonoBehaviour
             // 1. Dibuja el rayo desde el punto anterior al actual objetivo
             DrawLightningSegment(lastLightningPoint, currentTarget.position, lightningDuration);
 
-            // 2. Aplica daño al objetivo actual (simulado con Debug.Log)
-            Debug.Log($"Rayo golpeó a {currentTarget.name} por {damagePerJump} de daño!");
-            // currentTarget.GetComponent<EnemyHealth>().TakeDamage(damagePerJump); // <-- Tu lógica de daño
+            // 2. Aplica daño al objetivo actual
+            var health = currentTarget.GetComponent<Health>();
+            if (health != null)
+            {
+                health.TakeDamage(damagePerJump);
+                Debug.Log($"Rayo golpeó a {currentTarget.name} por {damagePerJump} de daño!");
+            }
 
             // 3. Busca el siguiente objetivo para encadenar
             lastLightningPoint = currentTarget.position;

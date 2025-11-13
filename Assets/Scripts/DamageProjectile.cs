@@ -6,7 +6,13 @@
         public class DamageProjectile : MonoBehaviour
         {
             [SerializeField] private float damage = 25f;
+            public void SetDamage(float newDamage)
+            {
+                damage = newDamage;
+            }
             [SerializeField] private float destroyDelay = 0.05f;
+            [SerializeField] private LayerMask targetLayers;
+            
             private bool hasHit = false;
             private Collider col;
             private Rigidbody rb;
@@ -27,20 +33,28 @@
             {
                 if (hasHit) return;
         
-                if (otherObj == null) return;
+                // 1) Filtrar por layer
+                if ((targetLayers.value & (1 << otherObj.layer)) == 0)
+                    return; // No es un objetivo válido
+
+                // 2) Buscar Health
                 var health = otherObj.GetComponent<Health>();
-                if (health != null)
+                if (health == null) return;
+
+                hasHit = true;
+                health.TakeDamage(damage);
+
+                // 3) Detener movimiento y desactivar collider
+                if (rb != null) rb.linearVelocity = Vector3.zero;
+                if (col != null) col.enabled = false;
+
+                if (destroyDelay > 0f)
                 {
-                    hasHit = true;
-                    health.TakeDamage(damage);
-        
-                    // detener movimiento si hay Rigidbody
-                    if (rb != null) rb.linearVelocity = Vector3.zero;
-        
-                    // deshabilitar collider para evitar múltiples colisiones
-                    if (col != null) col.enabled = false;
-        
                     StartCoroutine(DisableAfterDelay());
+                }
+                else
+                {
+                    gameObject.SetActive(false);
                 }
             }
         

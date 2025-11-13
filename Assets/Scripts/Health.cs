@@ -28,12 +28,12 @@ public class Health : MonoBehaviour
         currentHealth = Mathf.Min(currentHealth + amount, maxHealth);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        var hitbox = other.GetComponent<Hitbox>();
-        if (!hitbox) return;
-        TakeDamage(hitbox.damage);
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     var hitbox = other.GetComponent<Hitbox>();
+    //     if (!hitbox) return;
+    //     TakeDamage(hitbox.damage);
+    // }
 }
 
 
