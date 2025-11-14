@@ -1988,8 +1988,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerHealth
   gameOverPanel: {fileID: 1794728904}
   retryButton: {fileID: 112307568}
-  gameOverMusic: {fileID: 1393342373}
-  maxHealth: 10
+  maxHealth: 10000
   towerName: Tower1
   healthSlider: {fileID: 457734879}
 --- !u!114 &469724431
