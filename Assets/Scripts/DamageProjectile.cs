@@ -38,7 +38,7 @@
                     return; // No es un objetivo válido
 
                 // 2) Buscar Health
-                var health = otherObj.GetComponent<Health>();
+                var health = otherObj.GetComponent<EnemyHealth>();
                 if (health == null) return;
 
                 hasHit = true;

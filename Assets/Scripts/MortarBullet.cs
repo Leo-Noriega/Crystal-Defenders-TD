@@ -88,8 +88,8 @@ public class MortarBullet : MonoBehaviour
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, damageRadius, enemyLayers);
         foreach (Collider enemy in hitEnemies)
         {
-            var health = enemy.GetComponentInParent<Health>();
-            if (health == null) health = enemy.GetComponent<Health>();
+            var health = enemy.GetComponentInParent<EnemyHealth>();
+            if (health == null) health = enemy.GetComponent<EnemyHealth>();
             if (health != null)
             {
                 health.TakeDamage(damage);

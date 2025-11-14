@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e181d02b82cff3982af9a230b343ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 100
 --- !u!54 &7385713044251707673
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0948e53a13c40d14596c415b37bab7fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageProjectile
-  damage: 25
+  damage: 100
   destroyDelay: 0.05
   targetLayers:
     serializedVersion: 2

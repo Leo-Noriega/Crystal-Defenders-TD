@@ -7,6 +7,10 @@ public class EnemyShooting : MonoBehaviour
     public GameObject bulletPrefab; // Assign the Bullet prefab here
     public Transform firePoint; // Assign the point from where the bullet will be fired
     public Transform target; // Assign the TowerTag1 GameObject here
+
+    [Header("Auto Targeting")] 
+    public string targetTag = "Tower"; // Tag que usará para encontrar la torre
+
     public float fireRate = 2f; // Time between shots
     public float bulletSpeed = 10f; // Speed of the bullet
     public float shootingRange = 10f; // Distance within which the enemy starts shooting
@@ -36,6 +40,16 @@ public class EnemyShooting : MonoBehaviour
             if (rb != null)
             {
                 bullets.Add(rb);
+            }
+        }
+
+        // Buscar automáticamente la torre si no se asignó manualmente
+        if (target == null && !string.IsNullOrEmpty(targetTag))
+        {
+            var towerGO = GameObject.FindGameObjectWithTag(targetTag);
+            if (towerGO != null)
+            {
+                target = towerGO.transform;
             }
         }
     }

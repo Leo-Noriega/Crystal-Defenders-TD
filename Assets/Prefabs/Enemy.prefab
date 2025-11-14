@@ -46,8 +46,7 @@ GameObject:
   - component: {fileID: 8262022157879641920}
   - component: {fileID: 5940086680519903161}
   - component: {fileID: 1855193522381292637}
-  - component: {fileID: 4794110258394532038}
-  - component: {fileID: 6610269741245596680}
+  - component: {fileID: 7600889110264589893}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -185,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
   agent: {fileID: 0}
-  destination: {fileID: 0}
+  destination: {fileID: 1263863626913911215, guid: 50f2bef67e1504ad49b09f1cf2690d62, type: 3}
 --- !u!114 &1855193522381292637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,12 +200,13 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1234885817971972489, guid: c0d5c0ecbcc6efdfc9483c4670298414, type: 3}
   firePoint: {fileID: 6307462120856453340}
   target: {fileID: 0}
+  targetTag: Tower
   fireRate: 2
   bulletSpeed: 10
   shootingRange: 25
   bulletPool: {fileID: 0}
   poolSize: 15
---- !u!114 &4794110258394532038
+--- !u!114 &7600889110264589893
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -215,38 +215,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6518024124143440985}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3406c883a3cc14d4e97e2732fde0f21e, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b2a3b871077b487385f161d4efd2b13, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHealth: 100
-  currentHealth: 0
-  onHealthChange:
-    m_PersistentCalls:
-      m_Calls: []
-  onDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6610269741245596680}
-        m_TargetAssemblyTypeName: EnemyDeathHandler, Assembly-CSharp
-        m_MethodName: HandleDeath
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &6610269741245596680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6518024124143440985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51dc68996805543d7b77bacc3bf8e986, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyDeathHandler
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  maxHealth: 50

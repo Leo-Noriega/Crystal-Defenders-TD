@@ -137,8 +137,9 @@ MonoBehaviour:
   firePoint: {fileID: 5623663701094646824}
   bulletPrefab: {fileID: 4201254395057897189, guid: f8b6f5197ee3a416e98038c06e6e9936, type: 3}
   bulletPool: {fileID: 0}
-  range: 10
+  range: 50
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
   fireRate: 0.85
+  damagePerShot: 100

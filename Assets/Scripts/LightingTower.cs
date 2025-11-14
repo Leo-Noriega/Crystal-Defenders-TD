@@ -62,7 +62,7 @@ public class LightingTower : MonoBehaviour
             DrawLightningSegment(lastLightningPoint, currentTarget.position, lightningDuration);
 
             // 2. Aplica daño al objetivo actual
-            var health = currentTarget.GetComponent<Health>();
+            var health = currentTarget.GetComponent<EnemyHealth>();
             if (health != null)
             {
                 health.TakeDamage(damagePerJump);
