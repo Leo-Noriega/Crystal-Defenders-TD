@@ -20,7 +20,13 @@ public class EnemyShooting : MonoBehaviour
     public int poolSize = 20;            // Max bullets this enemy can have alive
     private readonly List<Rigidbody> bullets = new List<Rigidbody>();
 
+    [Header("Audio")]
+    public AudioClip enemyShotSound;     // Sonido del disparo del enemigo
+    [Range(0f, 1f)]
+    public float shotVolume = 0.05f;        // Volumen del disparo (0 a 1)
+
     private float nextFireTime;
+    private AudioSource audioSource;
 
     void Awake()
     {
@@ -52,6 +58,13 @@ public class EnemyShooting : MonoBehaviour
                 target = towerGO.transform;
             }
         }
+
+        // Inicializar AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     void Update()
@@ -72,6 +85,19 @@ public class EnemyShooting : MonoBehaviour
 
     void Shoot()
     {
+        // Reproducir sonido de disparo enemigo
+        if (audioSource != null && enemyShotSound != null)
+        {
+            shotVolume=0.05f;
+            audioSource.PlayOneShot(enemyShotSound, shotVolume);
+            Debug.Log($"[EnemyShooting] Disparando con volumen: {shotVolume}");
+        }
+        else
+        {
+            if (audioSource == null) Debug.LogWarning("[EnemyShooting] AudioSource es null");
+            if (enemyShotSound == null) Debug.LogWarning("[EnemyShooting] enemyShotSound es null");
+        }
+
         // Recoger una bala inactiva del pool
         var rb = bullets.FirstOrDefault(b => !b.gameObject.activeInHierarchy);
         if (rb == null)

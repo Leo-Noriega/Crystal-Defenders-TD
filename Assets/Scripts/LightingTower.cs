@@ -21,6 +21,8 @@ public class LightingTower : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip lightningAttackSound; // Sonido del ataque de rayo
+    [Range(0f, 1f)]
+    public float attackVolume = 1f;        // Volumen del ataque (0 a 1)
 
     private List<LineRenderer> activeRays = new List<LineRenderer>(); // Para gestionar los efectos visuales
     private float fireCd;
@@ -59,7 +61,7 @@ public class LightingTower : MonoBehaviour
         // Reproducir sonido de ataque de rayo
         if (audioSource != null && lightningAttackSound != null)
         {
-            audioSource.PlayOneShot(lightningAttackSound);
+            audioSource.PlayOneShot(lightningAttackSound, attackVolume);
         }
 
         // Escondemos todos los rayos antiguos antes de disparar nuevos (para evitar destellos)

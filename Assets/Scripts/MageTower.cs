@@ -18,6 +18,8 @@ public class SimpleTurret : MonoBehaviour
 
     [Header("Audio")]
     public AudioClip mageAttackSound; // Sonido del disparo de mago
+    [Range(0f, 1f)]
+    public float attackVolume = 1f;   // Volumen del ataque (0 a 1)
 
     readonly List<SimpleBullet> bullets = new();
     float fireCd;
@@ -68,7 +70,7 @@ public class SimpleTurret : MonoBehaviour
         // Reproducir sonido de disparo de mago
         if (audioSource != null && mageAttackSound != null)
         {
-            audioSource.PlayOneShot(mageAttackSound);
+            audioSource.PlayOneShot(mageAttackSound, attackVolume);
         }
 
         var bullet = bullets.FirstOrDefault(x => !x.gameObject.activeInHierarchy);

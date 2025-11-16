@@ -206,6 +206,8 @@ MonoBehaviour:
   maxHealth: 100
   towerName: Tower1
   healthSlider: {fileID: 0}
+  damageSound: {fileID: 8300000, guid: 703c9c5bdf30b024d8d2836ff41d356e, type: 3}
+  damageVolume: 0.117
 --- !u!114 &6195718408845741800
 MonoBehaviour:
   m_ObjectHideFlags: 0

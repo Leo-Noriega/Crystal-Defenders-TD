@@ -206,6 +206,8 @@ MonoBehaviour:
   shootingRange: 25
   bulletPool: {fileID: 0}
   poolSize: 15
+  enemyShotSound: {fileID: 8300000, guid: 3ddec475aae9d25458b7d576d35c60d9, type: 3}
+  shotVolume: 0.142
 --- !u!114 &7600889110264589893
 MonoBehaviour:
   m_ObjectHideFlags: 0
