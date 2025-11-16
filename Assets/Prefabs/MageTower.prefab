@@ -143,3 +143,4 @@ MonoBehaviour:
     m_Bits: 64
   fireRate: 0.85
   damagePerShot: 100
+  mageAttackSound: {fileID: 8300000, guid: 4ae6e55c1928077409f2d1de8b68fa63, type: 3}

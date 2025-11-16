@@ -16,8 +16,14 @@ public class SimpleTurret : MonoBehaviour
     [Header("Damage")]
     public float damagePerShot = 25f;
 
+    [Header("Audio")]
+    public AudioClip mageAttackSound; // Sonido del disparo de mago
+    [Range(0f, 1f)]
+    public float attackVolume = 1f;   // Volumen del ataque (0 a 1)
+
     readonly List<SimpleBullet> bullets = new();
     float fireCd;
+    private AudioSource audioSource;
 
     void Awake()
     {
@@ -34,6 +40,13 @@ public class SimpleTurret : MonoBehaviour
                 go.SetActive(false);
             }
             else Debug.LogError("¡Tu prefab de bala no tiene el script SimpleBullet!");
+        }
+
+        // Inicializar AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
     }
 
@@ -54,6 +67,12 @@ public class SimpleTurret : MonoBehaviour
 
     void Fire(Transform target)
     {
+        // Reproducir sonido de disparo de mago
+        if (audioSource != null && mageAttackSound != null)
+        {
+            audioSource.PlayOneShot(mageAttackSound, attackVolume);
+        }
+
         var bullet = bullets.FirstOrDefault(x => !x.gameObject.activeInHierarchy);
         if (bullet)
         {

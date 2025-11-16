@@ -17,8 +17,14 @@ public class MortarTower : MonoBehaviour
     [Header("Damage")]
     public float damage = 40f;
 
+    [Header("Audio")]
+    public AudioClip mortarAttackSound; // Sonido del disparo de mortero
+    [Range(0f, 1f)]
+    public float attackVolume = 1f;     // Volumen del ataque (0 a 1)
+
     readonly List<MortarBullet> pool = new();
     float fireCd;
+    private AudioSource audioSource;
 
     void Awake()
     {
@@ -28,6 +34,13 @@ public class MortarTower : MonoBehaviour
             var go = Instantiate(mortarBullet, bulletPool);
             var p = go.GetComponent<MortarBullet>();
             if (p) { pool.Add(p); go.SetActive(false); }
+        }
+
+        // Inicializar AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
         }
     }
 
@@ -47,6 +60,12 @@ public class MortarTower : MonoBehaviour
 
     void Fire(Vector3 targetPos)
     {
+        // Reproducir sonido de disparo de mortero
+        if (audioSource != null && mortarAttackSound != null)
+        {
+            audioSource.PlayOneShot(mortarAttackSound, attackVolume);
+        }
+
         var projectile = pool.FirstOrDefault(x => !x.gameObject.activeInHierarchy);
         if (projectile)
         {
