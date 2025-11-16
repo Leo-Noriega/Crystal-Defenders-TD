@@ -85,6 +85,8 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
+  damage: 40
+  mortarAttackSound: {fileID: 8300000, guid: 7aaa0606f0912ad48ade373a6674490f, type: 3}
 --- !u!1 &2871070025614695062
 GameObject:
   m_ObjectHideFlags: 0

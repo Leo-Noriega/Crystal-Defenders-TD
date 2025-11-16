@@ -19,14 +19,25 @@ public class LightingTower : MonoBehaviour
     public float lightningDuration = 0.2f; // Cuánto dura el efecto visual del rayo
     public float damagePerJump = 30f;      // Daño por cada enemigo golpeado
 
+    [Header("Audio")]
+    public AudioClip lightningAttackSound; // Sonido del ataque de rayo
+
     private List<LineRenderer> activeRays = new List<LineRenderer>(); // Para gestionar los efectos visuales
     private float fireCd;
+    private AudioSource audioSource;
 
     void Awake()
     {
         // Puedes crear un pool de LineRenderers si vas a tener muchos rayos simultáneos
         // Por simplicidad, los instanciamos y desactivamos/activamos.
         // Asegúrate de que el lineRendererPrefab tenga su GO desactivado por defecto.
+
+        // Inicializar AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     void Update()
@@ -45,6 +56,12 @@ public class LightingTower : MonoBehaviour
 
     void Attack(Transform primaryTarget)
     {
+        // Reproducir sonido de ataque de rayo
+        if (audioSource != null && lightningAttackSound != null)
+        {
+            audioSource.PlayOneShot(lightningAttackSound);
+        }
+
         // Escondemos todos los rayos antiguos antes de disparar nuevos (para evitar destellos)
         foreach (var lr in activeRays) { if (lr != null) lr.gameObject.SetActive(false); }
 
