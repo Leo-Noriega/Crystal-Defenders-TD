@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SimpleTurret : MonoBehaviour
+public class  MageTower : MonoBehaviour
 {
     [Header("Refs")]
     public Transform firePoint;              // Ponlo encima del cilindro
@@ -10,13 +10,13 @@ public class SimpleTurret : MonoBehaviour
     public Transform bulletPool;
 
     [Header("Config")]
-    public float range = 15f;                // Rango de detección
+    public float range = 50f;                // Rango de detección
     public LayerMask enemyLayers;
     public float fireRate = 1f;              // Balas por segundo
     [Header("Damage")]
     public float damagePerShot = 25f;
 
-    readonly List<SimpleBullet> bullets = new();
+    readonly List<MageBullet> bullets = new();
     float fireCd;
 
     void Awake()
@@ -26,7 +26,7 @@ public class SimpleTurret : MonoBehaviour
         for (int i = 0; i < 20; i++)
         {
             var go = Instantiate(bulletPrefab, bulletPool);
-            var b = go.GetComponent<SimpleBullet>();
+            var b = go.GetComponent<MageBullet>();
             // Asegúrate de que el prefab tenga el componente SimpleBullet
             if (b != null)
             {
