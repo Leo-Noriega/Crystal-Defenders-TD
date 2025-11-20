@@ -12,6 +12,6 @@ public class GameOverMenu : MonoBehaviour
         {
             musicController.StopMusic();
         }
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("HomeScreen");
     }
 }

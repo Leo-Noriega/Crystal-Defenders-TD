@@ -1792,9 +1792,7 @@ Transform:
   m_LocalPosition: {x: -2, y: 0, z: -10.7}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 910756663}
-  - {fileID: 2037678905}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &469724430
@@ -7264,3 +7262,4 @@ SceneRoots:
   - {fileID: 1294732378}
   - {fileID: 1433710465}
   - {fileID: 1564925034}
+  - {fileID: 469724429}
