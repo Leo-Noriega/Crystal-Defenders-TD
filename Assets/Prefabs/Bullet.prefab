@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 57047538867226786}
   - component: {fileID: 9048787481639698270}
   - component: {fileID: 7812983573863403722}
-  - component: {fileID: 3815805271238520962}
   - component: {fileID: -1040329132158781189}
   m_Layer: 3
   m_Name: Bullet
@@ -155,7 +154,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &3815805271238520962
+--- !u!114 &-1040329132158781189
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,20 +163,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1234885817971972489}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8c4b90dc51e34aa6836f102fef03f5e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Bullet2
-  damage: 0.5
-  lifeSeconds: 5
---- !u!114 &-1040329132158781189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1234885817971972489}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0948e53a13c40d14596c415b37bab7fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageProjectile
@@ -185,4 +170,4 @@ MonoBehaviour:
   destroyDelay: 0.1
   targetLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
