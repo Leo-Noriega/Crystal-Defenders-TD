@@ -186,6 +186,29 @@ MonoBehaviour:
   agent: {fileID: 0}
   destination: {fileID: 1263863626913911215, guid: 50f2bef67e1504ad49b09f1cf2690d62, type: 3}
   animator: {fileID: 6353510904685837128}
+--- !u!114 &1855193522381292637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6518024124143440985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07fc5b2611405428b87e9ed9315d546b, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyShooting
+  bulletPrefab: {fileID: 1234885817971972489, guid: c0d5c0ecbcc6efdfc9483c4670298414, type: 3}
+  firePoint: {fileID: 6307462120856453340}
+  target: {fileID: 0}
+  targetTag: Tower
+  fireRate: 2
+  bulletSpeed: 10
+  shootingRange: 25
+  bulletPool: {fileID: 0}
+  poolSize: 15
+  enemyShotSound: {fileID: 8300000, guid: 3ddec475aae9d25458b7d576d35c60d9, type: 3}
+  shotVolume: 0.142
 --- !u!114 &7600889110264589893
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -122,6 +122,7 @@ MonoBehaviour:
   jumpRange: 8
   lightningDuration: 0.2
   damagePerJump: 30
+  lightningAttackSound: {fileID: 8300000, guid: 329af0e233c153f43863c8e927941284, type: 3}
 --- !u!1 &6690304027069505662
 GameObject:
   m_ObjectHideFlags: 0
