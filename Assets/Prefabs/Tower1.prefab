@@ -204,6 +204,7 @@ MonoBehaviour:
   gameOverPanel: {fileID: 0}
   retryButton: {fileID: 0}
   maxHealth: 100
+  currentHealth: 0
   towerName: Tower1
   healthSlider: {fileID: 0}
   damageSound: {fileID: 8300000, guid: 703c9c5bdf30b024d8d2836ff41d356e, type: 3}

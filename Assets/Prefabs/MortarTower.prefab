@@ -80,12 +80,12 @@ MonoBehaviour:
   firePoint: {fileID: 9072587811252362327}
   mortarBullet: {fileID: 1000795078373292365, guid: 240b03b7f826b423c96dea3507b6de45, type: 3}
   bulletPool: {fileID: 0}
-  range: 20
-  fireRate: 0.5
+  range: 100
+  fireRate: 1
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
-  damage: 40
+  damage: 100
   mortarAttackSound: {fileID: 8300000, guid: 7aaa0606f0912ad48ade373a6674490f, type: 3}
 --- !u!1 &2871070025614695062
 GameObject:
