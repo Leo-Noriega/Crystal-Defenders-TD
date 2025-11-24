@@ -138,6 +138,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageProjectile
   damage: 25
   destroyDelay: 0.05
+  targetLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &317313625
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,7 +967,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0178d65ed2fda86e1a7741b6db253806, type: 2}
   m_sharedMaterial: {fileID: 1748451798378856408, guid: 0178d65ed2fda86e1a7741b6db253806, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 1748451798378856408, guid: 0178d65ed2fda86e1a7741b6db253806, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
