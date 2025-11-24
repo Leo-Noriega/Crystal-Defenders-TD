@@ -204,6 +204,7 @@ MonoBehaviour:
   gameOverPanel: {fileID: 0}
   retryButton: {fileID: 0}
   maxHealth: 100
+  currentHealth: 0
   towerName: Tower1
   healthSlider: {fileID: 0}
 --- !u!114 &6195718408845741800

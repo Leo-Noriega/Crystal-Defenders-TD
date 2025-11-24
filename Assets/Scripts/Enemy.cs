@@ -4,6 +4,8 @@ public class Enemy : MonoBehaviour
 {
     public UnityEngine.AI.NavMeshAgent agent;
     public Transform destination;
+    public Animator animator;
+    private int speedHash = Animator.StringToHash("MoveSpeed");
 
     void Start()
     {
@@ -27,5 +29,6 @@ public class Enemy : MonoBehaviour
         {
             agent.SetDestination(destination.position);
         }
+        animator.SetFloat(speedHash, agent.velocity.magnitude / agent.speed);
     }
 }
