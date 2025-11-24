@@ -9,7 +9,7 @@ public class TowerHealth : MonoBehaviour
     [SerializeField] private Button retryButton;       // Botón "Jugar de nuevo"
 
     public float maxHealth = 100f; // Maximum health of the tower
-    private float currentHealth;
+    public float currentHealth;
 
     public string towerName; // Unique name or ID for the tower
     [SerializeField] private Slider healthSlider; // Assign via Inspector or at runtime
@@ -18,7 +18,7 @@ public class TowerHealth : MonoBehaviour
     {
         // Initialize the health
         currentHealth = maxHealth;
-
+        GameEvents.TriggerVida(1f);
         // Registrar referencias UI si esta torre las tiene asignadas
         if (gameOverPanel != null)
         {
@@ -47,7 +47,8 @@ public class TowerHealth : MonoBehaviour
         currentHealth -= damage;
 
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
-
+        float porcentageLife = currentHealth / maxHealth;
+        GameEvents.TriggerVida(porcentageLife);
         // Update the health slider
         if (healthSlider != null)
         {

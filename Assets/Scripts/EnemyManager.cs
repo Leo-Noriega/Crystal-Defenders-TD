@@ -44,7 +44,7 @@ public class EnemyManager : MonoBehaviour
     void SpawnWave(int waveIndex)
     {
         Debug.Log($"[EnemyManager] Iniciando ronda {waveIndex + 1}");
-
+        GameEvents.TriggerOleada(waveIndex + 1);
         int amount = enemiesPerWave[waveIndex];
 
         currentEnemies.Clear();
