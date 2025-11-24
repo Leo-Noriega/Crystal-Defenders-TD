@@ -9,7 +9,7 @@ public class TowerHealth : MonoBehaviour
     [SerializeField] private Button retryButton;       // Botón "Jugar de nuevo"
 
     public float maxHealth = 100f; // Maximum health of the tower
-    private float currentHealth;
+    public float currentHealth;
 
     public string towerName; // Unique name or ID for the tower
     [SerializeField] private Slider healthSlider; // Assign via Inspector or at runtime
