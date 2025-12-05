@@ -170,6 +170,7 @@ MonoBehaviour:
   speed: 15
   turnSpeed: 5
   lifeSeconds: 5
+  hitDistance: 0.3
 --- !u!114 &4813875105273972481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0948e53a13c40d14596c415b37bab7fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageProjectile
-  damage: 100
+  damage: 15
   destroyDelay: 0.05
   targetLayers:
     serializedVersion: 2
