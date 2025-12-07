@@ -79,13 +79,7 @@ public class  MageTower : MonoBehaviour
             bullet.transform.position = firePoint.position;
             bullet.transform.rotation = firePoint.rotation; // Sale con la orientación del firepoint
             bullet.gameObject.SetActive(true);
-            var dmg = bullet.GetComponent<DamageProjectile>();
-            if (dmg != null)
-            {
-                dmg.SetDamage(damagePerShot);
-            }
-            // ¡Aquí está la magia! Le decimos a la bala quién es su presa.
-            bullet.SetTarget(target);
+            bullet.SetTarget(target, damagePerShot);
         }
     }
 

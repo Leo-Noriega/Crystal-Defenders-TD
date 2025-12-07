@@ -24,6 +24,7 @@ public class TowerHealth : MonoBehaviour
     {
         // Initialize the health
         currentHealth = maxHealth;
+        GameEvents.TriggerVida(1f);
 
         // Inicializar AudioSource
         audioSource = GetComponent<AudioSource>();
@@ -60,6 +61,8 @@ public class TowerHealth : MonoBehaviour
         currentHealth -= damage;
 
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
+        float porcentageLife = currentHealth / maxHealth;
+        GameEvents.TriggerVida(porcentageLife);
 
         // Reproducir sonido de daño
         if (audioSource != null && damageSound != null && currentHealth > 0)

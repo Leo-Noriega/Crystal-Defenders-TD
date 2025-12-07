@@ -79,11 +79,6 @@ public class ShopManager : MonoBehaviour
     public void OpenShopMenu(TowerNode node)
     {
         selectedNode = node;
-        
-        // Esta lógica de posición sigue siendo correcta
-        Vector3 screenPos = mainCamera.WorldToScreenPoint(node.buildPoint.position);
-        shopPanel.transform.position = screenPos;
-        
         shopPanel.SetActive(true);
     }
 
