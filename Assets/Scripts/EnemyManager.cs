@@ -95,52 +95,75 @@ public class EnemyManager : MonoBehaviour
         SpawnWave(currentWave);
     }
 
-    private void TriggerVictory()
+private void TriggerVictory()
+{
+    if (hasWon)
+        return; // evitar llamarlo dos veces
+
+    hasWon = true;
+
+    // Cambiar música a victoria
+    var musicManager = MusicManager.Instance ?? FindFirstObjectByType<MusicManager>();
+    if (musicManager != null)
     {
-        if (hasWon)
-            return; // evitar llamarlo dos veces
+        musicManager.PlayVictoryMusic();
+    }
 
-        hasWon = true;
+    // Pausar el juego al ganar (opcional)
+    Time.timeScale = 0f;
 
-        // Pausar el juego al ganar (opcional)
-        Time.timeScale = 0f;
+    if (victoryPanel != null)
+    {
+        victoryPanel.SetActive(true);
 
-        if (victoryPanel != null)
+        if (victoryRetryButton != null)
         {
-            victoryPanel.SetActive(true);
+            victoryRetryButton.onClick.RemoveAllListeners();
+            victoryRetryButton.onClick.AddListener(() =>
+            {
+                Time.timeScale = 1f; // reanudar
 
-            if (victoryRetryButton != null)
-            {
-                victoryRetryButton.onClick.RemoveAllListeners();
-                victoryRetryButton.onClick.AddListener(() =>
+                // Volver a la música principal del gameplay
+                var mm = MusicManager.Instance ?? FindFirstObjectByType<MusicManager>();
+                if (mm != null)
                 {
-                    Time.timeScale = 1f; // reanudar
-                    Scene current = SceneManager.GetActiveScene();
-                    SceneManager.LoadScene(current.buildIndex);
-                });
-            }
-            else
-            {
-                Debug.LogWarning("[EnemyManager] victoryRetryButton no asignado.");
-            }
+                    mm.PlayMainMusic();
+                }
 
-            if (victoryMenuButton != null)
-            {
-                victoryMenuButton.onClick.RemoveAllListeners();
-                victoryMenuButton.onClick.AddListener(() =>
-                {
-                    Time.timeScale = 1f;
-                    SceneManager.LoadScene("MainMenu"); // Ajusta el nombre de la escena del menú
-                });
-            }
-            else
-            {
-                Debug.LogWarning("[EnemyManager] victoryMenuButton no asignado.");
-            }
+                Scene current = SceneManager.GetActiveScene();
+                SceneManager.LoadScene(current.buildIndex);
+            });
         }
         else
         {
-            Debug.LogWarning("[EnemyManager] victoryPanel no asignado.");
+            Debug.LogWarning("[EnemyManager] victoryRetryButton no asignado.");
+        }
+
+        if (victoryMenuButton != null)
+        {
+            victoryMenuButton.onClick.RemoveAllListeners();
+            victoryMenuButton.onClick.AddListener(() =>
+            {
+                Time.timeScale = 1f;
+
+                // Reproducir música del menú principal
+                var mm = MusicManager.Instance ?? FindFirstObjectByType<MusicManager>();
+                if (mm != null)
+                {
+                    mm.PlayMenuMusic();
+                }
+
+                SceneManager.LoadScene("MainMenu"); // Ajusta según el nombre real del menú
+            });
+        }
+        else
+        {
+            Debug.LogWarning("[EnemyManager] victoryMenuButton no asignado.");
         }
     }
+    else
+    {
+        Debug.LogWarning("[EnemyManager] victoryPanel no asignado.");
+    }
+}
 }
