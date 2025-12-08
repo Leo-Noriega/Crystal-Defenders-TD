@@ -24,50 +24,14 @@ public class EnemyShooting : MonoBehaviour
 
     void Awake()
     {
-        // Crear el contenedor del pool si no se asignó
-        if (bulletPool == null)
-        {
-            var poolGo = new GameObject($"{name}_EnemyBulletPool");
-            bulletPool = poolGo.transform;
-        }
-
-        // Pre-instanciar las balas y desactivarlas
-        for (int i = 0; i < poolSize; i++)
-        {
-            var go = Object.Instantiate(bulletPrefab, bulletPool);
-            go.SetActive(false);
-            var rb = go.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                bullets.Add(rb);
-            }
-        }
-
-        // Buscar automáticamente la torre si no se asignó manualmente
-        if (target == null && !string.IsNullOrEmpty(targetTag))
-        {
-            var towerGO = GameObject.FindGameObjectWithTag(targetTag);
-            if (towerGO != null)
-            {
-                target = towerGO.transform;
-            }
-        }
+        // Desactivado - los enemigos ahora usan ataque cuerpo a cuerpo (EnemyAttack)
+        return;
     }
 
     void Update()
     {
-        if (target != null)
-        {
-            // Calculate the distance between the enemy and the target
-            float distanceToTarget = Vector3.Distance(transform.position, target.position);
-
-            // Check if the enemy is within shooting range and it's time to shoot
-            if (distanceToTarget <= shootingRange && Time.time >= nextFireTime)
-            {
-                Shoot();
-                nextFireTime = Time.time + 1f / fireRate; // Set the next fire time
-            }
-        }
+        // Desactivado - los enemigos ahora usan ataque cuerpo a cuerpo (EnemyAttack)
+        return;
     }
 
     void Shoot()

@@ -14,11 +14,25 @@ public class TowerHealth : MonoBehaviour
     public string towerName; // Unique name or ID for the tower
     [SerializeField] private Slider healthSlider; // Assign via Inspector or at runtime
 
+    [Header("Audio")]
+    public AudioClip damageSound;     // Sonido cuando la torre recibe daño
+    [Range(0f, 1f)]
+    public float damageVolume = 1f;   // Volumen del sonido de daño
+    private AudioSource audioSource;
+
     void Start()
     {
         // Initialize the health
         currentHealth = maxHealth;
         GameEvents.TriggerVida(1f);
+
+        // Inicializar AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
         // Registrar referencias UI si esta torre las tiene asignadas
         if (gameOverPanel != null)
         {
@@ -49,6 +63,13 @@ public class TowerHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
         float porcentageLife = currentHealth / maxHealth;
         GameEvents.TriggerVida(porcentageLife);
+
+        // Reproducir sonido de daño
+        if (audioSource != null && damageSound != null && currentHealth > 0)
+        {
+            audioSource.PlayOneShot(damageSound, damageVolume);
+        }
+
         // Update the health slider
         if (healthSlider != null)
         {
