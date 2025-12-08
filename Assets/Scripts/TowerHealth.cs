@@ -29,7 +29,7 @@ public class TowerHealth : MonoBehaviour
         // Expect the slider to be assigned in the Inspector or via SetHealthBar()
         if (healthSlider == null)
         {
-            Debug.LogError($"[TowerHealth] No healthSlider assigned on {name}. Assign it in the Inspector or call SetHealthBar().");
+            //Debug.LogError($"[TowerHealth] No healthSlider assigned on {name}. Assign it in the Inspector or call SetHealthBar().");
             return;
         }
 
@@ -64,28 +64,21 @@ public class TowerHealth : MonoBehaviour
 
     void DestroyTower()
     {
-        // Destruir visualmente la torre
-        Destroy(gameObject);
+        var musicManager = MusicManager.Instance ?? FindFirstObjectByType<MusicManager>();
+        if (musicManager != null)
+        {
+            musicManager.PlayGameOverMusic();
+        }
 
-        // Mostrar pantalla de Game Over ya que esta es la única torre
+        Destroy(gameObject);
         TriggerGameOver();
     }
-
     private void TriggerGameOver()
     {
         // Pausar el juego (opcional); comenta esta línea si no quieres pausar
         Time.timeScale = 0f;
 
-        var musicController = FindFirstObjectByType<GameOverMusicController>();
-        if (musicController != null)
-        {
-            musicController.PlayMusic();
-        }
-        else
-        {
-            Debug.LogWarning("No se encontró GameOverMusicController en la escena.");
-        }
-        
+        // Mostrar panel de Game Over
         if (gameOverPanel != null)
         {
             gameOverPanel.SetActive(true);
@@ -95,14 +88,17 @@ public class TowerHealth : MonoBehaviour
                 retryButton.onClick.RemoveAllListeners();
                 retryButton.onClick.AddListener(() =>
                 {
+                    // Reanudar el tiempo
                     Time.timeScale = 1f;
-                    
-                    var musicController = FindFirstObjectByType<GameOverMusicController>();
-                    if (musicController != null)
+
+                    // Volver a la música principal
+                    var musicManager = MusicManager.Instance ?? FindFirstObjectByType<MusicManager>();
+                    if (musicManager != null)
                     {
-                        musicController.StopMusic();
+                        musicManager.PlayMainMusic();
                     }
-                    
+
+                    // Recargar la escena actual
                     Scene current = SceneManager.GetActiveScene();
                     SceneManager.LoadScene(current.buildIndex);
                 });
