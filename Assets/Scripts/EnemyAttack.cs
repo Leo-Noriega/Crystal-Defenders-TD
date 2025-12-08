@@ -8,9 +8,23 @@ public class EnemyAttack : MonoBehaviour
     public bool isAttacking = false;
     public Animator animator;
     public int damage = 10;
+
+    [Header("Audio")]
+    public AudioClip attackSound;
+    [Range(0f, 1f)]
+    public float attackVolume = 0.5f;
+    private AudioSource audioSource;
+
     void Start()
     {
         target = GameObject.FindGameObjectWithTag("Tower").transform;
+
+        // Inicializar AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     // Update is called once per frame
@@ -47,12 +61,14 @@ public class EnemyAttack : MonoBehaviour
 
     private void Attack()
     {
-        
-        //Debug.Log("[EnemyShooting] Attack() fue llamado");
+        // Reproducir sonido de ataque
+        if (audioSource != null && attackSound != null)
+        {
+            audioSource.PlayOneShot(attackSound, attackVolume);
+        }
 
         if (target == null)
         {
-            //Debug.LogWarning("[EnemyShooting] target es NULL, no puedo atacar.");
             return;
         }
 

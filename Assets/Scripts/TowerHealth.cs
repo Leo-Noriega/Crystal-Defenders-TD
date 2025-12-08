@@ -14,11 +14,25 @@ public class TowerHealth : MonoBehaviour
     public string towerName; // Unique name or ID for the tower
     [SerializeField] private Slider healthSlider; // Assign via Inspector or at runtime
 
+    [Header("Audio")]
+    public AudioClip damageSound;     // Sonido cuando la torre recibe daño
+    [Range(0f, 1f)]
+    public float damageVolume = 1f;   // Volumen del sonido de daño
+    private AudioSource audioSource;
+
     void Start()
     {
         // Initialize the health
         currentHealth = maxHealth;
         GameEvents.TriggerVida(1f);
+
+        // Inicializar AudioSource
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
+
         // Registrar referencias UI si esta torre las tiene asignadas
         if (gameOverPanel != null)
         {
@@ -29,7 +43,7 @@ public class TowerHealth : MonoBehaviour
         // Expect the slider to be assigned in the Inspector or via SetHealthBar()
         if (healthSlider == null)
         {
-            Debug.LogError($"[TowerHealth] No healthSlider assigned on {name}. Assign it in the Inspector or call SetHealthBar().");
+            //Debug.LogError($"[TowerHealth] No healthSlider assigned on {name}. Assign it in the Inspector or call SetHealthBar().");
             return;
         }
 
@@ -49,6 +63,13 @@ public class TowerHealth : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth, 0f, maxHealth);
         float porcentageLife = currentHealth / maxHealth;
         GameEvents.TriggerVida(porcentageLife);
+
+        // Reproducir sonido de daño
+        if (audioSource != null && damageSound != null && currentHealth > 0)
+        {
+            audioSource.PlayOneShot(damageSound, damageVolume);
+        }
+
         // Update the health slider
         if (healthSlider != null)
         {
@@ -64,28 +85,21 @@ public class TowerHealth : MonoBehaviour
 
     void DestroyTower()
     {
-        // Destruir visualmente la torre
-        Destroy(gameObject);
+        var musicManager = MusicManager.Instance ?? FindFirstObjectByType<MusicManager>();
+        if (musicManager != null)
+        {
+            musicManager.PlayGameOverMusic();
+        }
 
-        // Mostrar pantalla de Game Over ya que esta es la única torre
+        Destroy(gameObject);
         TriggerGameOver();
     }
-
     private void TriggerGameOver()
     {
         // Pausar el juego (opcional); comenta esta línea si no quieres pausar
         Time.timeScale = 0f;
 
-        var musicController = FindFirstObjectByType<GameOverMusicController>();
-        if (musicController != null)
-        {
-            musicController.PlayMusic();
-        }
-        else
-        {
-            Debug.LogWarning("No se encontró GameOverMusicController en la escena.");
-        }
-        
+        // Mostrar panel de Game Over
         if (gameOverPanel != null)
         {
             gameOverPanel.SetActive(true);
@@ -95,14 +109,17 @@ public class TowerHealth : MonoBehaviour
                 retryButton.onClick.RemoveAllListeners();
                 retryButton.onClick.AddListener(() =>
                 {
+                    // Reanudar el tiempo
                     Time.timeScale = 1f;
-                    
-                    var musicController = FindFirstObjectByType<GameOverMusicController>();
-                    if (musicController != null)
+
+                    // Volver a la música principal
+                    var musicManager = MusicManager.Instance ?? FindFirstObjectByType<MusicManager>();
+                    if (musicManager != null)
                     {
-                        musicController.StopMusic();
+                        musicManager.PlayMainMusic();
                     }
-                    
+
+                    // Recargar la escena actual
                     Scene current = SceneManager.GetActiveScene();
                     SceneManager.LoadScene(current.buildIndex);
                 });

@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: damage
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 1026117862327848621, guid: e416907ecea0548f4ad4892633018e06, type: 3}
+      propertyPath: mortarAttackSound
+      value:
+      objectReference: {fileID: 8300000, guid: 7aaa0606f0912ad48ade373a6674490f, type: 3}
     - target: {fileID: 1362313345077687215, guid: e416907ecea0548f4ad4892633018e06, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
